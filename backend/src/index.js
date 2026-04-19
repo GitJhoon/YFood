@@ -4,6 +4,7 @@ import Client from "./database/mongodb.js";
 import { config } from "dotenv";
 import authRouter from "./routes/auth.js";
 import usersRouter from "./routes/users.js";
+import platesRouter from "./routes/plates.js";
 
 config();
 
@@ -32,6 +33,8 @@ async function main() {
   app.use("/auth", authRouter);
 
   app.use("/users", usersRouter);
+
+  app.use("/plates", platesRouter);
 
   app.listen(port, () => {
     console.log(`\nServer is running on: http://${hostname}:${port}\n`);
