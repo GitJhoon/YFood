@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const Mongo = {
+const Client = {
   async connect({ mongoConnectionString, mongoDbName }) {
     try {
       const client = new MongoClient(mongoConnectionString);
@@ -23,4 +23,6 @@ const Mongo = {
   },
 };
 
-export default Mongo;
+
+
+export default Client;

@@ -1,8 +1,9 @@
 import cors from "cors";
 import express from "express";
-import Mongo from "./database/mongodb.js";
+import Client from "./database/mongodb.js";
 import { config } from "dotenv";
-import authRouter from "./auth/auth.js";
+import authRouter from "./routes/auth.js";
+import usersRouter from "./routes/users.js";
 
 config();
 
@@ -12,12 +13,10 @@ async function main() {
 
   const app = express();
 
-  const mongoConnection = await Mongo.connect({
+  const mongoConnection = await Client.connect({
     mongoConnectionString: process.env.MONGO_CS,
     mongoDbName: process.env.MONGO_DB_NAME,
   });
-
-  console.log(mongoConnection);
 
   app.use(express.json());
   app.use(cors());
@@ -31,6 +30,8 @@ async function main() {
   });
 
   app.use("/auth", authRouter);
+
+  app.use("/users", usersRouter);
 
   app.listen(port, () => {
     console.log(`\nServer is running on: http://${hostname}:${port}\n`);
