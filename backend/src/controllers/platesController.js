@@ -13,6 +13,7 @@ class platesController {
             
             return successResponse(plates);
         }catch(error){
+
             return errorResponse(error);
         }
     }
@@ -51,10 +52,17 @@ class platesController {
 
     async addPlates(plateData){
         try{
+            if(Array.isArray(plateData)){
+                const newPlate = await Client.db.collection(this.collectionName).insertMany(plateData);
+
+                return successResponse(newPlate);
+            }
+
             const newPlate = await Client.db.collection(this.collectionName).insertOne(plateData);
 
             return successResponse(newPlate);
         }catch(error){
+
             return errorResponse(error);
         }
     }

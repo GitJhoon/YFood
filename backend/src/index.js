@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import authRouter from "./routes/auth.js";
 import usersRouter from "./routes/users.js";
 import platesRouter from "./routes/plates.js";
+import ordersRouter from "./routes/orders.js";
 
 config();
 
@@ -13,7 +14,7 @@ async function main() {
   const port = 3000;
 
   const app = express();
-
+  
   const mongoConnection = await Client.connect({
     mongoConnectionString: process.env.MONGO_CS,
     mongoDbName: process.env.MONGO_DB_NAME,
@@ -35,6 +36,8 @@ async function main() {
   app.use("/users", usersRouter);
 
   app.use("/plates", platesRouter);
+
+  app.use("/orders", ordersRouter);
 
   app.listen(port, () => {
     console.log(`\nServer is running on: http://${hostname}:${port}\n`);
