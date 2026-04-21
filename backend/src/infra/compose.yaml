@@ -1,0 +1,8 @@
+services:
+  database:
+    container_name: "mongodb_test"
+    image: "mongodb/mongodb-community-server:5.0-ubuntu2004"
+    env_file:
+      - "../.env"
+    ports:
+      - "27017:27017"
