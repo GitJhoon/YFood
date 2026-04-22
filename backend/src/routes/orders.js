@@ -11,16 +11,22 @@ orderRouter.get("/", async(req, res) => {
     return res.status(res.statusCode).send(orders);
 });
 
-orderRouter.delete("/:id", async(req, res) => {
-    const deletedOrder = await orderControllerInstance.deleteOrder(req.params.id);
+orderRouter.get("/:userId", async(req, res) => {
+    const ordersByUser = await orderControllerInstance.getOrderByUser(req.params.userId);
+
+    return res.status(ordersByUser.statusCode).send(ordersByUser);
+});
+
+orderRouter.delete("/:orderId", async(req, res) => {
+    const deletedOrder = await orderControllerInstance.deleteOrder(req.params.orderId);
 
     return res.status(deletedOrder.statusCode).send(deletedOrder);
 });
 
-orderRouter.put("/:id", async (req, res) => {
-    const updatedOrder = await orderControllerInstance.updateOrder(req.params.id, req.body);
+orderRouter.put("/:orderId", async (req, res) => {
+    const updatedOrder = await orderControllerInstance.updateOrder(req.params.orderId, req.body);
 
-    return res.status(updatedOrder.status).send(updatedOrder);
+    return res.status(updatedOrder.statusCode).send(updatedOrder);
 });
 
 orderRouter.post("/", async (req, res) => {

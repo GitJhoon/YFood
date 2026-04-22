@@ -21,9 +21,10 @@
   "scripts": {
     "service:up":"sudo docker compose -f infra/compose.yaml up -d",
     "service:down":"sudo docker compose -f infra/compose.yaml down",
+    "connectDatabase":"sudo docker exec -it mongodb_test mongosh -u user -p pass",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "dev": "npm run service:up && node index.js"
+    "dev": "npm run service:up && nodemon index.js"
   },
   "author": "Jonathan Araujo Rodrigues",
   "license": "MIT",

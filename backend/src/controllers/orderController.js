@@ -7,6 +7,26 @@ class orderController {
         this.collectionName = "orders";
     }
 
+    async getOrderByUser(userId){
+        try{
+
+            const orders = await Client.db.collection("orders")
+            .find({userId: new ObjectId(userId)}).toArray();
+
+            let itemsByUser = await Promise.all(orders.map(async (order) => {
+                return await Client.db.collection("orderItems").find({"orderId": order._id}).toArray();
+            }));
+
+            itemsByUser = itemsByUser.flat();
+
+            return successResponse(itemsByUser);
+        }catch(error){
+            console.error(error);
+
+            return errorResponse(error);
+        }
+    }
+
     async getOrders(){
         try{
             const orders = await Client.db.collection(this.collectionName)
@@ -52,11 +72,18 @@ class orderController {
         }
     }
 
-    async deleteOrder(id){
+    async deleteOrder(orderId){
         try{
-            const deletedOrder = await Client.db.collection(this.collectionName).findOneAndDelete({ _id: new ObjectId(id)});
+            const itemsDeleted = await Client.db.collection("orderItems").
+            deleteMany({orderId: new ObjectId(orderId)});
+            
+            const deletedOrder = await Client.db.collection(this.collectionName)
+            .findOneAndDelete({ _id: new ObjectId(orderId)});
 
-            return successResponse(deletedOrder);
+            return successResponse({
+                deletedOrder,
+                itemsDeleted
+            });
         }catch(error){
             return errorResponse(error);
         }
