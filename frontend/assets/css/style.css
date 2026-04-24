@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+}
+
+.container {
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
+    border-radius: 10px;
+}
+
+.form-image {
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #6db6fa;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.form-image img {
+    width: 31rem;
+}
+
+.form {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    background: #eb4747;
+    border-radius: 10px;
+}
+
+.form-header {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #fff;
+    gap: 15px;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+}
+
+.login-button button {
+    border: none;
+    background-color: #6db6fa; 
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button button:hover {
+    background-color:  #0c53ecf1;
+}
+
+.login-button a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.input-group {
+    display: flex;    
+    justify-content: space-between;
+    flex-direction:column;
+    padding: 1rem 0;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.1rem;
+    color: #fff;
+    border-radius: 5px;
+}
